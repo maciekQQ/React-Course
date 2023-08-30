@@ -7,7 +7,6 @@ const TodoForm = () => {
   const addTodo = useAddTodo(() => {
     if (ref.current) ref.current.value = "";
   });
-
   return (
     <>
       {addTodo.error && (
