@@ -4,7 +4,7 @@ import { Todo } from "./hooks/useTodos";
 import axios from "axios";
 
 interface AddTodoContext {
-  previous: Todo[];
+  previousTodos: Todo[];
 }
 
 const TodoForm = () => {
@@ -33,11 +33,10 @@ const TodoForm = () => {
         todos?.map((todo) => (todo === newTodo ? savedTodo : todo))
       );
     },
-
     onError: (error, newTodo, context) => {
       if (!context) return;
 
-      queryClient.getQueryData<Todo[]>(["todos"], context.previousTodos);
+      queryClient.setQueryData<Todo[]>(["todos"], context.previousTodos);
     },
   });
   const ref = useRef<HTMLInputElement>(null);
