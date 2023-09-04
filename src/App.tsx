@@ -1,27 +1,16 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import "./App.css";
-import { Dispatch } from "react";
-
-import TodoForm from "./react-query/TodoForm";
-import TodoList from "./react-query/TodoList";
-import Counter from "./state-management/Counter";
-import TaskList from "./state-management/TaskList";
-import LoginStatus from "./state-management/LoginStatus";
-import { useReducer } from "react";
-import tasksReducer from "./state-management/reducers/tasksReducer";
-import NavBar from "./routing/NavBar";
-import HomePage from "./routing/HomePage";
-import TasksContext from "./state-management/contexts/tasksContext";
+import AuthProvider from "./state-management/AuthProvider";
+import HomePage from "./state-management/HomePage";
+import NavBar from "./state-management/NavBar";
+import TasksProvider from "./state-management/tasks/TasksProvider";
 
 function App() {
-  const [tasks, dispatch] = useReducer(tasksReducer, []);
   return (
-    <>
-      <TasksContext.Provider value={{ tasks, dispatch }}>
+    <AuthProvider>
+      <TasksProvider>
         <NavBar />
         <HomePage />
-      </TasksContext.Provider>
-    </>
+      </TasksProvider>
+    </AuthProvider>
   );
 }
 
